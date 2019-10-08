@@ -8,10 +8,6 @@ function ask(questionText) {
   });
 }
 
-function randInBetweenNumbers(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
 function middleInBetweenNumnbers(min, max) {
   return Math.floor((max+min)/2);
 }
@@ -48,29 +44,28 @@ async function humanGuessGame(){
       console.log("YOU ALREADY TRIED THAT NUMBER... TRY AGAIN...");
       getUserGuess();
     }
-    let previous = previousGuessArr.pop();
+    let previous = previousGuessArr[previousGuessArr.length - 1]
     previousGuessArr.push(userGuess);
     numGuesses++;
 
     if(userGuess < compGeneratedNum){
-      //cheat detector needs work. this basically keeps the array always at length of 1 or 2, which works, but not sure if it's good.
-      /*if(previous > userGuess){
-        console.log("previousGuessArr = " + previousGuessArr);
-        console.log("previous = " + previous);
-        console.log("You are going in the wrong direction... Please read the instructions... ");
-      }*/
+      if(previous > userGuess){
+        console.log("You are going in the wrong direction... PLEASE READ THE INSTRUCTIONS... ");
+      }
       console.log("Computer generated number is higher than your guess. Try again.");
-      //if the next guess is lower, do something.
       getUserGuess();
     }
     if(userGuess > compGeneratedNum){
+
+      if(previous < userGuess){
+        console.log("You are going in the wrong direction... PLEASE READ THE INSTRUCTIONS... ");
+      }
+
       console.log("Computer generated number is lower than your guess. Try again.");
       getUserGuess();
     }
     if(userGuess == compGeneratedNum){
       console.log('YOU WIN!!! It took you ' + numGuesses + '  guesses!');
-      //whichGame();
-      //play computer game here...
       computerGuessGame();
     }
   }
@@ -91,7 +86,6 @@ async function askUserIfNumIsCorrect(){
   if(agree === 'Y'){
     console.log("Computer wins the game!!!\nIt only took said computer " + numGuesses + " tries!");
     //whichGame();
-    //play human guess game 
     humanGuessGame();
   }
   if(agree === 'N'){
