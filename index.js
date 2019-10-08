@@ -69,7 +69,9 @@ async function humanGuessGame(){
     }
     if(userGuess == compGeneratedNum){
       console.log('YOU WIN!!! It took you ' + numGuesses + '  guesses!');
-      whichGame();
+      //whichGame();
+      //play computer game here...
+      computerGuessGame();
     }
   }
   getUserGuess();
@@ -88,7 +90,9 @@ async function askUserIfNumIsCorrect(){
   let agree = await ask("Is your Number... " + number + " ...? Y/N ");
   if(agree === 'Y'){
     console.log("Computer wins the game!!!\nIt only took said computer " + numGuesses + " tries!");
-    whichGame();
+    //whichGame();
+    //play human guess game 
+    humanGuessGame();
   }
   if(agree === 'N'){
       let lowerOrHigher = await ask("Is the number lower or higher? L or H ");
